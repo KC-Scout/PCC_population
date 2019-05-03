@@ -26,6 +26,10 @@ for pop_dict in pop_data:
         else:
             no_code_list.append(country_name)
             
+print(cc_pops_1)
+print(cc_pops_2)
+print(cc_pops_3)
+
 with open('no_code_list.json', 'w') as f:
     json.dump(no_code_list, f)
     
