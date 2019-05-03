@@ -3,11 +3,13 @@ import pygal.maps.world
 from country_codes import get_country_code
 from pygal.style import RotateStyle
 
+no_code_list = []
 filename = 'population_data.json'
 with open(filename) as f:
     pop_data = json.load(f)
     
 # Build a dictionary of country data
+no_code = []
 cc_pops_1, cc_pops_2, cc_pops_3 = {}, {}, {}
 for pop_dict in pop_data:
     if pop_dict['Year'] == '2010':
@@ -21,7 +23,12 @@ for pop_dict in pop_data:
                 cc_pops_2[code] = population
             else:
                 cc_pops_3[code] = population
-
+        else:
+            no_code_list.append(country_name)
+            
+with open('no_code_list.json', 'w') as f:
+    json.dump(no_code_list, f)
+    
 print(len(cc_pops_1), len(cc_pops_2), len(cc_pops_3))
 
 wm_style = RotateStyle('#336699')  
